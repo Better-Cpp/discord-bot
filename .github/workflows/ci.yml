@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Ban '<iostream>' project wide
+      run: |
+        if grep -rnE --include='*.cpp' --include='*.hpp' '^#include\s*<iostream>' src; then
+          echo "iostream is banned in this project"
+          exit 1
+        fi
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y software-properties-common
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+        sudo apt update
+        sudo apt install -y gcc-16 g++-16 ninja-build python3-pip
+    - name: Get CMake 4.0+ and Ninja
+      uses: lukka/get-cmake@latest
+      with:
+        cmakeVersion: "4.0.x"
+        ninjaVersion: "latest"
+    - name: Install Conan
+      run: pip install conan
+    - name: Detect Conan profile
+      run: conan profile detect --force
+    - name: Conan build
+      run: conan build . --build=missing -pr:a profiles/gcc-16
