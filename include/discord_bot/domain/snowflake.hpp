@@ -23,7 +23,7 @@ public:
       return;
     }
     auto const res = std::from_chars(sv.data(), sv.data() + sv.size(), value_);
-    if (res.ec != std::errc{}) {
+    if (res.ec != std::errc{} || res.ptr != sv.data() + sv.size()) {
       throw std::invalid_argument("Failed to parse Snowflake from string");
     }
   }

@@ -1,7 +1,12 @@
+#include <dpp/snowflake.h>
+#include <optional>
+#include <ranges>
+
 #include "convert.hpp"
+#include "discord_bot/domain/snowflake.hpp"
 #include <dpp/cluster.h>
 #include <dpp/message.h>
-#include <optional>
+#include <vector>
 
 namespace discord_bot::convert {
 
@@ -133,14 +138,24 @@ domain::MessageDeleteBulk to_domain(dpp::message_delete_bulk_t const& e) {
   domain::MessageDeleteBulk out;
   for (auto const id : e.deleted)
     out.ids.push_back(to_domain(id));
-  out.channel_id = to_domain(e.deleting_channel->id);
-  out.guild_id = to_optional_domain(e.deleting_guild->id);
+  out.channel_id =
+      e.deleting_channel
+          ? to_domain(e.deleting_channel->id)
+          : domain::Snowflake(
+                0); // For some reason, D++ stores them behind a pointer,
+                    // even though the Discord API guarantees they exist.
+  out.guild_id = e.deleting_guild->id ? to_optional_domain(e.deleting_guild->id)
+                                      : std::nullopt;
   return out;
 }
 
 domain::Ready to_domain(dpp::ready_t const& e, dpp::cluster const& cluster) {
   return {
       .user = convert::to_domain(cluster.me),
+      .guild_ids = e.guilds |
+                   std::views::transform(
+                       [](dpp::snowflake const& id) { return to_domain(id); }) |
+                   std::ranges::to<std::vector>(),
       .session_id = e.session_id,
       .shard_id = e.shard_id,
   };

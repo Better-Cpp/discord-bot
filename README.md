@@ -19,5 +19,5 @@ conan build . --build=missing -pr:a profiles/gcc-16
 
 ```bash
 export BOT_TOKEN="YOUR_DISCORD_BOT_TOKEN"
-./build/Release/bot
+./build/Release/src/bot
 ```
