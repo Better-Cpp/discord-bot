@@ -1,7 +1,9 @@
 #include <cstdlib>
 #include <print>
+#include <utility>
 
 #include <discord_bot/bot.hpp>
+#include <discord_bot/handlers.hpp>
 
 int main() {
   char const* token = std::getenv("BOT_TOKEN");
@@ -10,6 +12,7 @@ int main() {
     return EXIT_FAILURE;
   }
 
-  Bot bot{token};
+  discord_bot::Bot bot{token};
+  discord_bot::register_handlers(bot);
   bot.run();
 }
