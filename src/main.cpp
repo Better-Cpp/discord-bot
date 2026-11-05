@@ -1,8 +1,9 @@
 #include <cstdlib>
 #include <print>
+#include <utility>
 
 #include <discord_bot/bot.hpp>
-#include <discord_bot/domain/events.hpp>
+#include <discord_bot/handlers.hpp>
 
 int main() {
   char const* token = std::getenv("BOT_TOKEN");
@@ -12,12 +13,6 @@ int main() {
   }
 
   discord_bot::Bot bot{token};
-  bot.on<discord_bot::domain::Ready>([](auto const& event) {
-    std::println("Logged in as {}#{}", event.user.username,
-                 event.user.discriminator);
-  });
-  bot.on<discord_bot::domain::MessageCreate>([](auto const& event) {
-    std::println("Received message: {}", event.message.content);
-  });
+  discord_bot::register_handlers(bot);
   bot.run();
 }

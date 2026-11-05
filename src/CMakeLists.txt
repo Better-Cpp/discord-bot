@@ -1,4 +1,4 @@
-add_library(bot_lib STATIC convert.cpp bot.cpp)
+add_library(bot_lib STATIC convert.cpp handlers.cpp bot.cpp)
 target_include_directories(bot_lib PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_link_libraries(bot_lib PUBLIC dpp::dpp)
 
