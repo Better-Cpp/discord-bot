@@ -8,9 +8,8 @@
 #include "snowflake.hpp"
 #include "user.hpp"
 
-namespace domain {
+namespace discord_bot::domain {
 
-/// Emoji Structure
 /// Source: https://docs.discord.com/developers/resources/emoji#emoji-object
 struct Emoji {
   std::optional<Snowflake> id;
@@ -23,7 +22,6 @@ struct Emoji {
   std::optional<bool> available;
 };
 
-/// Reaction Count Details Structure
 /// Source:
 /// https://docs.discord.com/developers/resources/message#reaction-count-details-object
 struct ReactionCountDetails {
@@ -31,7 +29,6 @@ struct ReactionCountDetails {
   uint32_t normal{0};
 };
 
-/// Reaction Structure
 /// Source:
 /// https://docs.discord.com/developers/resources/message#reaction-object
 struct Reaction {
@@ -43,4 +40,4 @@ struct Reaction {
   std::vector<std::string> burst_colors;
 };
 
-} // namespace domain
+} // namespace discord_bot::domain

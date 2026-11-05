@@ -1,5 +1,3 @@
-/// Source: https://docs.discord.com/developers/events/gateway-events
-
 #pragma once
 
 #include <cstdint>
@@ -13,9 +11,8 @@
 #include "snowflake.hpp"
 #include "user.hpp"
 
-namespace domain {
+namespace discord_bot::domain {
 
-/// Dispatched when a message is created.
 /// Source:
 /// https://docs.discord.com/developers/events/gateway-events#message-create
 struct MessageCreate {
@@ -24,7 +21,6 @@ struct MessageCreate {
   std::optional<ChannelType> channel_type;
 };
 
-/// Dispatched when a message is updated.
 /// Source:
 /// https://docs.discord.com/developers/events/gateway-events#message-update
 struct MessageUpdate {
@@ -33,7 +29,6 @@ struct MessageUpdate {
   std::optional<ChannelType> channel_type;
 };
 
-/// Dispatched when a message is deleted.
 /// Source:
 /// https://docs.discord.com/developers/events/gateway-events#message-delete
 struct MessageDelete {
@@ -42,7 +37,6 @@ struct MessageDelete {
   std::optional<Snowflake> guild_id;
 };
 
-/// Dispatched when multiple messages are deleted at once.
 /// Source:
 /// https://docs.discord.com/developers/events/gateway-events#message-delete-bulk
 struct MessageDeleteBulk {
@@ -51,17 +45,15 @@ struct MessageDeleteBulk {
   std::optional<Snowflake> guild_id;
 };
 
-/// Dispatched when client completes handshake with gateway.
 /// Source: https://docs.discord.com/developers/events/gateway-events#ready
 struct Ready {
-  uint8_t version{0};
   User user;
   std::vector<Snowflake> guild_ids;
   std::string session_id;
-  std::optional<std::string> resume_gateway_url;
+  std::optional<std::uint32_t> shard_id;
 };
 
 using EventTypes = std::variant<MessageCreate, MessageUpdate, MessageDelete,
                                 MessageDeleteBulk, Ready>;
 
-} // namespace domain
+} // namespace discord_bot::domain

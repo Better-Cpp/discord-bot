@@ -7,14 +7,13 @@
 
 #include "snowflake.hpp"
 
-namespace domain {
+namespace discord_bot::domain {
 
-/// User object
 /// Source: https://docs.discord.com/developers/resources/user#user-object
 struct User {
   Snowflake id;
   std::string username;
-  std::string discriminator{"0"};
+  uint16_t discriminator{0};
   std::optional<std::string> global_name;
   std::optional<std::string> avatar;
   std::optional<bool> bot;
@@ -42,4 +41,4 @@ struct User {
   }
 };
 
-} // namespace domain
+} // namespace discord_bot::domain

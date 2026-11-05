@@ -6,16 +6,14 @@
 #include <string>
 #include <vector>
 
-namespace domain {
+namespace discord_bot::domain {
 
-/// Embed Media Flags
 /// Source:
 /// https://docs.discord.com/developers/resources/message#embed-object-embed-media-flags
 enum class EmbedMediaFlags : uint32_t {
   IS_ANIMATED = 1 << 5,
 };
 
-/// Embed Flags
 /// Source:
 /// https://docs.discord.com/developers/resources/message#embed-object-embed-flags
 enum class EmbedFlags : uint32_t {
@@ -25,7 +23,6 @@ enum class EmbedFlags : uint32_t {
   CONTAINS_SELF_HARM_CONTENT = 1 << 7,
 };
 
-/// Embed Field Structure
 /// Source:
 /// https://docs.discord.com/developers/resources/message#embed-object-embed-field-structure
 struct EmbedField {
@@ -34,7 +31,6 @@ struct EmbedField {
   std::optional<bool> is_inline;
 };
 
-/// Embed Footer Structure
 /// Source:
 /// https://docs.discord.com/developers/resources/message#embed-object-embed-footer-structure
 struct EmbedFooter {
@@ -43,7 +39,6 @@ struct EmbedFooter {
   std::optional<std::string> proxy_icon_url;
 };
 
-/// Embed Image Structure
 /// Source:
 /// https://docs.discord.com/developers/resources/message#embed-object-embed-image-structure
 struct EmbedImage {
@@ -58,7 +53,6 @@ struct EmbedImage {
   std::optional<EmbedMediaFlags> flags;
 };
 
-/// Discord Embed Video Structure
 /// Source:
 /// https://docs.discord.com/developers/resources/message#embed-object-embed-video-structure
 struct EmbedVideo {
@@ -73,7 +67,6 @@ struct EmbedVideo {
   std::optional<EmbedMediaFlags> flags;
 };
 
-/// Embed Provider Structure
 /// Source:
 /// https://docs.discord.com/developers/resources/message#embed-object-embed-provider-structure
 struct EmbedProvider {
@@ -81,7 +74,6 @@ struct EmbedProvider {
   std::optional<std::string> url;
 };
 
-/// Embed Author Structure
 /// Source:
 /// https://docs.discord.com/developers/resources/message#embed-object-embed-author-structure
 struct EmbedAuthor {
@@ -91,7 +83,6 @@ struct EmbedAuthor {
   std::optional<std::string> proxy_icon_url;
 };
 
-/// Embed Structure
 /// Source: https://docs.discord.com/developers/resources/message#embed-object
 struct Embed {
   std::optional<std::string> title;
@@ -109,4 +100,4 @@ struct Embed {
   std::vector<EmbedField> fields;
 };
 
-} // namespace domain
+} // namespace discord_bot::domain

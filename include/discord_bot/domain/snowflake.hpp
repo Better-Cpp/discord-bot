@@ -8,9 +8,8 @@
 #include <string>
 #include <string_view>
 
-namespace domain {
+namespace discord_bot::domain {
 
-/// Discord Snowflake ID
 class Snowflake {
 public:
   static constexpr uint64_t DiscordEpoch = 1420070400000ULL;
@@ -48,17 +47,19 @@ private:
   uint64_t value_{0};
 };
 
-} // namespace domain
+} // namespace discord_bot::domain
 
-template <> struct std::hash<domain::Snowflake> {
-  size_t operator()(domain::Snowflake const& sf) const noexcept {
+template <> struct std::hash<discord_bot::domain::Snowflake> {
+  size_t operator()(discord_bot::domain::Snowflake const& sf) const noexcept {
     return std::hash<uint64_t>{}(sf.value());
   }
 };
 
 template <>
-struct std::formatter<domain::Snowflake> : std::formatter<uint64_t> {
-  auto format(domain::Snowflake const& sf, std::format_context& ctx) const {
+struct std::formatter<discord_bot::domain::Snowflake>
+    : std::formatter<uint64_t> {
+  auto format(discord_bot::domain::Snowflake const& sf,
+              std::format_context& ctx) const {
     return std::formatter<uint64_t>::format(sf.value(), ctx);
   }
 };

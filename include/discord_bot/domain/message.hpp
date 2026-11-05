@@ -1,6 +1,3 @@
-/// Discord Message object
-/// Source: https://docs.discord.com/developers/resources/message
-
 #pragma once
 
 #include <chrono>
@@ -17,9 +14,8 @@
 #include "snowflake.hpp"
 #include "user.hpp"
 
-namespace domain {
+namespace discord_bot::domain {
 
-/// Message Types
 /// Source:
 /// https://docs.discord.com/developers/resources/message#message-object-message-types
 enum class MessageType : uint8_t {
@@ -62,7 +58,6 @@ enum class MessageType : uint8_t {
   PollResult = 46,
 };
 
-/// Message Reference Types
 /// Source:
 /// https://docs.discord.com/developers/resources/message#message-reference-types
 enum class MessageRefType : uint8_t {
@@ -70,7 +65,6 @@ enum class MessageRefType : uint8_t {
   Forward = 1,
 };
 
-/// Message Reference Structure
 /// Source:
 /// https://docs.discord.com/developers/resources/message#message-reference-structure
 struct MessageReference {
@@ -81,7 +75,6 @@ struct MessageReference {
   std::optional<bool> fail_if_not_exists;
 };
 
-/// Message Flags
 /// Source:
 /// https://docs.discord.com/developers/resources/message#message-object-message-flags
 enum class MessageFlags : uint32_t {
@@ -100,7 +93,6 @@ enum class MessageFlags : uint32_t {
   IsComponentsV2 = 1 << 15,
 };
 
-/// Message Structure
 /// Source: https://docs.discord.com/developers/resources/message#message-object
 struct Message {
   Snowflake id;
@@ -190,4 +182,4 @@ inline Message& Message::operator=(Message const& other) {
   return *this;
 }
 
-} // namespace domain
+} // namespace discord_bot::domain

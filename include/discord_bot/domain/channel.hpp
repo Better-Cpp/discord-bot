@@ -8,9 +8,8 @@
 #include "snowflake.hpp"
 #include "user.hpp"
 
-namespace domain {
+namespace discord_bot::domain {
 
-/// Channel Types
 /// Source:
 /// https://docs.discord.com/developers/resources/channel#channel-object-channel-types
 enum class ChannelType : uint8_t {
@@ -29,7 +28,6 @@ enum class ChannelType : uint8_t {
   GuildMedia = 16,
 };
 
-/// Channel Mention object
 /// Source:
 /// https://docs.discord.com/developers/resources/channel#channel-mention-object
 struct ChannelMention {
@@ -39,7 +37,6 @@ struct ChannelMention {
   std::string name;
 };
 
-/// Channel object
 /// Source: https://docs.discord.com/developers/resources/channel#channel-object
 struct Channel {
   Snowflake id;
@@ -63,4 +60,4 @@ struct Channel {
   // TDOD: complete the rest of the fields as needed.
 };
 
-} // namespace domain
+} // namespace discord_bot::domain

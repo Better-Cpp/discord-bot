@@ -6,9 +6,8 @@
 
 #include "snowflake.hpp"
 
-namespace domain {
+namespace discord_bot::domain {
 
-/// Attachment Flags
 /// source:
 /// https://docs.discord.com/developers/resources/message#attachment-object-attachment-flags
 enum class AttachmentFlag : uint32_t {
@@ -22,7 +21,6 @@ enum class AttachmentFlag : uint32_t {
   CONTAINS_SELF_HARM_CONTENT = 1 << 7,
 };
 
-/// Attachment object
 /// Source:
 /// https://docs.discord.com/developers/resources/message#attachment-object
 struct Attachment {
@@ -35,7 +33,7 @@ struct Attachment {
   std::string url;
   std::string proxy_url;
   std::optional<std::string> placeholder;
-  uint8_t placeholder_version;
+  std::optional<uint8_t> placeholder_version;
   std::optional<uint32_t> height;
   std::optional<uint32_t> width;
   std::optional<bool> ephemeral;
@@ -44,4 +42,4 @@ struct Attachment {
   uint32_t flags{0};
 };
 
-} // namespace domain
+} // namespace discord_bot::domain
